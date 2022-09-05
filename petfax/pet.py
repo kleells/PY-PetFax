@@ -9,9 +9,9 @@ pets = json.load(open('pets.json'))
 
 bp = Blueprint('pet',  __name__, url_prefix="/pets")
 
+# default route is GET unless specified
 @bp.route('/')
-def index():
-    # tell the route to render the index.html template to the application
+def index(): 
     return render_template('pets/index.html', pets=pets)
 
 @bp.route('/<int:id>')

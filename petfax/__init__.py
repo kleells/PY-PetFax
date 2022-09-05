@@ -3,6 +3,7 @@ from flask import Flask
 def create_app():
     app = Flask(__name__)
 
+    # default route is GET unless specified
     @app.route('/')
     def hello():
         return 'Hello, PetFax!'
