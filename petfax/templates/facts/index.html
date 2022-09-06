@@ -9,11 +9,11 @@
 </head>
 <body>
     <div class="container">
-        <H1>UserFax</H1>
         <h1>UserFax</h1>
         {% for fact in facts %}
-        <h4>Submitted by {{ fact.submitter }}</h4>
-        {{ fact.fact }} {% endfor %}
+            <h4>Submitted by {{ fact.submitter }}</h4>
+            {{ fact.fact }}
+        {% endfor %}
     </div>
 </body>
 </html>

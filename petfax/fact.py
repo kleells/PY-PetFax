@@ -1,17 +1,24 @@
-from flask import ( Blueprint, render_template, request, redirect ) 
+from flask import ( Blueprint, render_template, request, redirect )
+from . import models
 
 bp = Blueprint('fact', __name__, url_prefix="/facts")
 
 # route that goes to '/' and import the request pacakge from flask
 @bp.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method =='POST':
-        print(request.form)
-        # imprt redirect from flask and use redirect method to run if
-        # the request.method is NOT POST
+    if request.method == 'POST':
+        submitter = request.form['submitter']
+        fact = request.form['fact']
+
+        new_fact = models.Fact(submitter=submitter, fact=fact)
+        models.db.session.add(new_fact)
+        models.db.session.commit()
+
         return redirect('/facts')
 
-    return render_template('facts/index.html')
+    results = models.Fact.query.all()
+
+    return render_template('facts/index.html', facts=results)
 
 # default route is GET unless specified
 @bp.route('/new')
